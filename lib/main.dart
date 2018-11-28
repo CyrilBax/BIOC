@@ -114,19 +114,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
     _tabcontroller = new TabController( vsync: this, length: myTabs.length);
 
-    var _futurBuilder = new  FutureBuilder(
-      future: loadService(),
-      builder: (context,snapshot){
-
-        if(snapshot.hasData){
-          //return snapshot.data;
-          return Text("Ok");
-        } else if (snapshot.hasError){
-          print("nop");
-          return Text("${snapshot.error}");
-        }
-      },
-    );
 
     return new DefaultTabController(
       length: 4, // Nombre d'onglet

@@ -1,22 +1,4 @@
 
-
-///
-/// Class qui va nous permettre de créer une liste des service Json
-/// Cette class vas nous permettre de transferer les donnéer normalement ahha ... les reves
-///
-
-class ServiceJson{
-
-  final int index ;
-
-  ServiceJson(int index) : index = index;
-
-  int get ind => index;
-
-
-}
-
-
 ///
 /// Enssemble des classes dont nous avons besoin pour lire le fichier Json
 ///

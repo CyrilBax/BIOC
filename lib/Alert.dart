@@ -1,28 +1,41 @@
-import 'package:flutter/material.dart';
-import 'package:device_info/device_info.dart';
-import 'PageServiceList.dart';
-import 'Resultat.dart';
-import 'Dev.dart';
-import 'Formulaire.dart';
-
-// Page de test de nos widgets
 
 
-class alert extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new Scaffold(
-      body: CustomScrollView(
-        slivers: <Widget>[
-          SliverAppBar(
-            flexibleSpace: FlexibleSpaceBar(
-              title: Text("BIOC app"),
-              background: Image.network("https://img3.telestar.fr/var/telestar/storage/images/3/0/5/6/3056045/netflix-annonce-des-projets-france_width1024.png"),
-            ),
-          )
-        ],
-      ),
+class UsersList{
+  final List<Users> user;
+
+  UsersList({
+    this.user,
+  });
+
+  factory UsersList.fromJson(List<dynamic> parsedJson){
+
+    List<Users> entireList = new List<Users>();
+
+    entireList = parsedJson.map((i)=>Users.fromJson(i)).toList();
+
+    return UsersList(
+      user: entireList,
     );
   }
 }
 
+class Users{
+  final String name;
+  final String age;
+  final String hobby;
+
+  Users({
+    this.name,
+    this.age,
+    this.hobby
+  });
+
+  factory Users.fromJson(Map<String, dynamic> json){
+    return new Users(
+      name: json['name'],
+      age: json['age'],
+      hobby: json['hobby'],
+    );
+  }
+
+}
