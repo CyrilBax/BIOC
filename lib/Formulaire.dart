@@ -29,37 +29,33 @@ class _FormulaireState extends State<Formulaire> {
 
   ///Fonction d'ajout de widget dans la list
   addWidget(){
-    ListWidget.add(CreationFormulaire());
+      for( int i = 1 ; i <= taille ; i++){
+        ListWidget.add(CreationFormulaire(context, i));
+      }
   }
-
-  affichage(){
-    for(int i= 0; i<=taille; i++){
-      return ListWidget[i];
-    }
-  }
-
 
   @override
   Widget build(BuildContext context) {
 
+
     ///Création de la list
-    for(int i = 0; i< taille; i++){
-      addWidget();
-    }
+    ///Seulement si elle est vide
+      if(ListWidget.length == 0){
+        addWidget();
+      }
+      print(_buttonvalue);
+
 
     return Scaffold(
       body: new Column(
         children: <Widget>[
           SizedBox(height: 20.0),
           Flexible(
-                /*child: ListView.builder(
+                child: ListView.builder(
                     itemCount: taille,
                     itemBuilder: ( BuildContext context, int index) => ListWidget[index]
-                )*/
-                child: ListView(
-                  children: ListWidget,
-                ),
-            ),
+                )
+          )
         ],
       ),
     );
@@ -67,13 +63,12 @@ class _FormulaireState extends State<Formulaire> {
 
 }
 
-
-///
-/// Creation d'un element du formulaire
-///
-
-
 class CreationFormulaire extends StatefulWidget {
+
+  int i;
+
+  CreationFormulaire(BuildContext context, this.i);
+
   @override
   _CreationFormulaireState createState() => _CreationFormulaireState();
 }
@@ -82,7 +77,6 @@ class _CreationFormulaireState extends State<CreationFormulaire> {
 
   ServiceList serviceFormulaire = MyApp.HomePageKey.currentState.service;
   int _indexForm = MyApp.HomePageKey.currentState.indexFormulaire;
-  int _index = MyApp.HomePageKey.currentState.formulaireindex;
   bool _switchvalue = false;
   String _dropvalue;
   bool _buttonvalue = false;
@@ -100,7 +94,7 @@ class _CreationFormulaireState extends State<CreationFormulaire> {
   Widget creation(){
 
 
-    switch(serviceFormulaire.service[_indexForm].element[_index].type){
+    switch(serviceFormulaire.service[_indexForm].element[widget.i].type){
 
 
     ///
@@ -112,10 +106,10 @@ class _CreationFormulaireState extends State<CreationFormulaire> {
             border: UnderlineInputBorder(),
             filled: true,
             icon: Icon(Icons.person),
-            labelText: serviceFormulaire.service[_indexForm].element[_index].value.removeLast(),
+            labelText: serviceFormulaire.service[_indexForm].element[widget.i].value.removeLast(),
           ),
           onSaved: (String value) {
-              this._textvalue = value;
+            this._textvalue = value;
           },
         );
         break;
@@ -126,24 +120,24 @@ class _CreationFormulaireState extends State<CreationFormulaire> {
     /// S'il est du type RadioGroup
     ///
       case "radioGroup" :
-        List<String> menuItem = serviceFormulaire.service[_indexForm].element[_index].value;
+        List<String> menuItem = serviceFormulaire.service[_indexForm].element[widget.i].value;
         final List<DropdownMenuItem<String>> _dropDownMenuItems = menuItem.map(
-            (String value) => DropdownMenuItem<String>(
+                (String value) => DropdownMenuItem<String>(
               value: value,
               child: Text(value),
             )
         ).toList();
         return ListTile(
-          title: Text(serviceFormulaire.service[_indexForm].element[_index].section),
+          title: Text(serviceFormulaire.service[_indexForm].element[widget.i].section),
           trailing: DropdownButton(
-              items: _dropDownMenuItems,
-              value: _dropvalue,
-              hint: Text("Choose"),
-              onChanged: ((String value) {
-                setState(() {
-                  _dropvalue = value;
-                });
-              }),
+            items: _dropDownMenuItems,
+            value: _dropvalue,
+            hint: Text("Choose"),
+            onChanged: ((String value) {
+              setState(() {
+                _dropvalue = value;
+              });
+            }),
           ),
         );
         break;
@@ -155,8 +149,8 @@ class _CreationFormulaireState extends State<CreationFormulaire> {
     ///
       case "label":
         return Text(
-            serviceFormulaire.service[_indexForm].element[_index].section,
-            textAlign: TextAlign.center,
+          serviceFormulaire.service[_indexForm].element[widget.i].section,
+          textAlign: TextAlign.center,
         );
         break;
 
@@ -166,7 +160,7 @@ class _CreationFormulaireState extends State<CreationFormulaire> {
     ///
       case "switch":
         return ListTile(
-          title: Text(serviceFormulaire.service[_indexForm].element[_index].section),
+          title: Text(serviceFormulaire.service[_indexForm].element[widget.i].section),
           trailing: Switch(
             activeColor: Colors.blue,
             onChanged: (bool value){
@@ -186,7 +180,7 @@ class _CreationFormulaireState extends State<CreationFormulaire> {
       case "button":
 
         return ListTile(
-          title: Text(serviceFormulaire.service[_indexForm].element[_index].section),
+          title: Text(serviceFormulaire.service[_indexForm].element[widget.i].section),
           trailing: Checkbox(
             activeColor: Colors.blue,
             onChanged: (bool value){
