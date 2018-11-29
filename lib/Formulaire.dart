@@ -237,7 +237,7 @@ class _CreationFormulaireState extends State<CreationFormulaire> {
             onChanged: ((String value) {
               setState(() {
                 _dropvalue = value;
-                MyApp.HomePageKey.currentState.ListEssai.add(_dropvalue.toString());
+                MyApp.HomePageKey.currentState.ListEssai.add("${serviceFormulaire.service[_indexForm].element[widget.i].section.toString()}: ${_dropvalue.toString()}");
               });
             }),
           ),
@@ -268,7 +268,7 @@ class _CreationFormulaireState extends State<CreationFormulaire> {
             onChanged: (bool value){
               setState(() {
                 _switchvalue = value;
-                MyApp.HomePageKey.currentState.ListEssai.add(_switchvalue.toString());
+                MyApp.HomePageKey.currentState.ListEssai.add("${serviceFormulaire.service[_indexForm].element[widget.i].section.toString()}: ${_switchvalue.toString()}");
               });
             },
             value: _switchvalue,
@@ -283,13 +283,13 @@ class _CreationFormulaireState extends State<CreationFormulaire> {
       case "button":
 
         return ListTile(
-          title: Text(serviceFormulaire.service[_indexForm].element[widget.i].section),
+          title: Text("${serviceFormulaire.service[_indexForm].element[widget.i].section.toString()}  ${serviceFormulaire.service[_indexForm].element[widget.i].value.toString()}"),
           trailing: Checkbox(
             activeColor: Colors.blue,
             onChanged: (bool value){
               setState(() {
                 _buttonvalue = value;
-                MyApp.HomePageKey.currentState.ListEssai.add(_buttonvalue.toString());
+                MyApp.HomePageKey.currentState.ListEssai.add("${serviceFormulaire.service[_indexForm].element[widget.i].value.toString()}: ${_buttonvalue.toString()}");
               });
             },
             value: _buttonvalue,

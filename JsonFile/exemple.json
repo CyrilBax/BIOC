@@ -16,7 +16,7 @@
       {
         "section": "info",
         "type": "edit",
-        "value": ["PrÃ©nom"],
+        "value": ["Prénom"],
         "mandatory": "true"
       },
       {
@@ -74,7 +74,7 @@
         {
           "section": "info",
           "type": "edit",
-          "value": ["PrÃ©nom"],
+          "value": ["Prénom"],
           "mandatory": "true"
         },
         {
