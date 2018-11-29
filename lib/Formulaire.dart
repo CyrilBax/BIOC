@@ -31,10 +31,10 @@ class _FormulaireState extends State<Formulaire> {
 
   File jsonFile;
   Directory dir;
-  String fileName = "ecriture.json";
+  String fileName = "${MyApp.HomePageKey.currentState.service.service[MyApp.HomePageKey.currentState.indexFormulaire].title}.json";
   bool fileExists = false;
   Map<dynamic, dynamic> fileContent;
-  List<String> ListEssai = ["coucou","j'essai","ma","list","de"];
+  List<String> ListEssai = MyApp.HomePageKey.currentState.ListEssai;
 
 
   ///Fonction d'ajout de widget dans la list
@@ -45,17 +45,22 @@ class _FormulaireState extends State<Formulaire> {
   }
 
 
+
   @override
   void initState(){
     super.initState();
     print("enter initfile");
     getApplicationDocumentsDirectory().then((Directory directory) {
+      print("enter directory");
       dir = directory;
+      MyApp.HomePageKey.currentState.directory = dir;
       jsonFile = new File(dir.path  + "/" + fileName);
       fileExists = jsonFile.existsSync();
       if (fileExists) this.setState(() => fileContent = json.decode(jsonFile.readAsStringSync()));
     });
   }
+
+
 
   void createFile(Map<dynamic, dynamic> content, String fileName) {
     print("Creating file!");
@@ -65,9 +70,9 @@ class _FormulaireState extends State<Formulaire> {
     file.writeAsStringSync(json.encode(content));
   }
 
-  void writeToFile(String key, String value) {
+  void writeToFile(String key, List<String> value) {
     print("Writing to file!");
-    Map<String, dynamic> content = {"user" : ListEssai};
+    Map<String, dynamic> content = {key : ListEssai};
     if (fileExists) {
       print("File exists");
       Map<String, dynamic> jsonFileContent = json.decode(jsonFile.readAsStringSync());
@@ -81,13 +86,14 @@ class _FormulaireState extends State<Formulaire> {
 
 //    ServiceList servicerecup = ServiceList.fromJson(fileContent['Netflix']);
 //    print(servicerecup.service[0].title);
-    fileContent.forEach(iterateMapEntry);
-    print("");
+    /*fileContent.forEach(iterateMapEntry);
+    print("");*/
   }
 
-  void iterateMapEntry(key, value) {
+  iterateMapEntry(key, value) {
     fileContent[key];
     print('$key:$value');
+    return Text("hello");
   }
 
   @override
@@ -117,8 +123,9 @@ class _FormulaireState extends State<Formulaire> {
                   child: Text("Submit"),
                   color: Colors.grey,
                   onPressed: (){
-                    ListEssai.add("i");
-                    writeToFile("trois essai", "why");
+                    writeToFile(ListEssai[0], ListEssai);
+                    MyApp.HomePageKey.currentState.ListEssai.clear();
+                    MyApp.HomePageKey.currentState.tabcontroller.animateTo(MyApp.HomePageKey.currentState.tabcontroller.index + 1);
                   }
               )
           )
@@ -154,22 +161,28 @@ class _CreationFormulaireState extends State<CreationFormulaire> {
   bool _switchvalue = false;
   String _dropvalue;
   bool _buttonvalue = false;
-  String _textvalue;
 
-  int get indexForm => _indexForm;
+  final text = TextEditingController();
 
-  bool get switchvalue => _switchvalue;
+  @override
+  void dispose() {
+    text.dispose();
+    super.dispose();
+  }
 
-  String get dropvalue => _dropvalue;
-
-  bool get buttonvalue => _buttonvalue;
-
-  String get textvalue => _textvalue;
+  @override
+  void initState() {
+    MyApp.HomePageKey.currentState.ListEssai.add(text.text);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
 
+
+
     MyApp.HomePageKey.currentState.formulaireindex ++ ;
+
     return Container(
       child: creation(),
     );
@@ -185,15 +198,19 @@ class _CreationFormulaireState extends State<CreationFormulaire> {
     /// S'il est du type Edit
     ///
       case "edit" :
+        String name = serviceFormulaire.service[_indexForm].element[widget.i].value.toString();
         return TextFormField(
+          controller: text,
           decoration: InputDecoration(
             border: UnderlineInputBorder(),
             filled: true,
             icon: Icon(Icons.person),
             labelText: serviceFormulaire.service[_indexForm].element[widget.i].value.removeLast(),
           ),
-          onSaved: (String value) {
-            this._textvalue = value;
+          onEditingComplete: (){
+            MyApp.HomePageKey.currentState.ListEssai.add(" $name: ${text.text}");
+            //MyApp.HomePageKey.currentState.ListEssai.add(text.text); // On ajoute le text valider dans la list
+            SystemChannels.textInput.invokeMethod('TextInput.hide'); // Fonction permettant l'arret du clavier
           },
         );
         break;
@@ -220,6 +237,7 @@ class _CreationFormulaireState extends State<CreationFormulaire> {
             onChanged: ((String value) {
               setState(() {
                 _dropvalue = value;
+                MyApp.HomePageKey.currentState.ListEssai.add(_dropvalue.toString());
               });
             }),
           ),
@@ -250,6 +268,7 @@ class _CreationFormulaireState extends State<CreationFormulaire> {
             onChanged: (bool value){
               setState(() {
                 _switchvalue = value;
+                MyApp.HomePageKey.currentState.ListEssai.add(_switchvalue.toString());
               });
             },
             value: _switchvalue,
@@ -270,6 +289,7 @@ class _CreationFormulaireState extends State<CreationFormulaire> {
             onChanged: (bool value){
               setState(() {
                 _buttonvalue = value;
+                MyApp.HomePageKey.currentState.ListEssai.add(_buttonvalue.toString());
               });
             },
             value: _buttonvalue,

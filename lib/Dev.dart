@@ -13,7 +13,7 @@ class Dev extends StatelessWidget{
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             new Text(""),
-            new Text("Application BIOC créer par\n", style: Theme.of(context).textTheme.title),
+            new Text("Application BIOC crée par\n", style: Theme.of(context).textTheme.title),
             new Text(""),
             new Text("Cyril", style: Theme.of(context).textTheme.headline),
             new Text("David", style: Theme.of(context).textTheme.headline),

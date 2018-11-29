@@ -60,21 +60,28 @@ class PageServiceList extends StatelessWidget {
               children: <Widget>[
                 Card(
                     margin: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 20.0),
-                    child: InkWell(
-                      onTap: (){
+                    child: Column(
+                      children: <Widget>[
+                        InkWell(
+                          onTap: (){
 
-                        MyApp.HomePageKey.currentState.indexFormulaire = index;
+                            MyApp.HomePageKey.currentState.indexFormulaire = index;
 
-                        MyApp.HomePageKey.currentState.service = service;
+                            MyApp.HomePageKey.currentState.service = service;
 
-                        MyApp.HomePageKey.currentState.formulaireindex = 1;
+                            MyApp.HomePageKey.currentState.formulaireindex = 1;
 
-                        MyApp.HomePageKey.currentState.tabcontroller.animateTo(MyApp.HomePageKey.currentState.tabcontroller.index + 1);
-                      },
+                            MyApp.HomePageKey.currentState.tabcontroller.animateTo(MyApp.HomePageKey.currentState.tabcontroller.index + 1);
+                          },
 
-                      // ** Chercher le titre de chaque service ( tant qu'ils existe ) et cherche l'element avec un titre et prendre son value
+                          // ** Chercher le titre de chaque service ( tant qu'ils existe ) et cherche l'element avec un titre et prendre son value
 
-                      child: Image.network('${service.service[index].element[0].value.removeLast()}'),
+                          child: Image.network('${service.service[index].element[0].value.removeLast()}'),
+                        ),
+                        ButtonTheme.bar(
+                          child: Text("${service.service[index].title}"),
+                        )
+                      ],
                     )
                 ),
               ],

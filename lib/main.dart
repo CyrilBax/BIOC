@@ -1,11 +1,12 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:biocapp/JsonClass.dart';
 import 'PageServiceList.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:device_info/device_info.dart';
 import 'dart:async';
+import "package:system_info/system_info.dart";
 
 
 //import des pages
@@ -77,6 +78,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     ),
   ];
 
+  ///Controller de la tabbar
   TabController _tabcontroller;
 
   FutureBuilder _futureBuilder;
@@ -93,6 +95,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   FutureBuilder get futurBuilder => _futureBuilder;
 
+  ///List des service
+  ///Accès dans toutes les pages
   ServiceList _service;
 
   ServiceList get service => _service;
@@ -109,11 +113,39 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     _formulaireindex = value;
   }
 
+  /// Creation de la directory de notre fichier
+  Directory _directory;
+
+  Directory get directory => _directory;
+
+  set directory(Directory value) {
+    _directory = value;
+  }
+
+  ///List des valeurs rentrer par l'utilisateur
+  List<String> _ListEssai = [];
+
+  List<String> get ListEssai => _ListEssai;
+
+  set ListEssai(List<String> value) {
+    _ListEssai = value;
+  }
+
+  List<String> _controlleur =[];
+
+  List<String> get controlleur => _controlleur;
+
+  set controlleur(List<String> value) {
+    _controlleur = value;
+  }
+
   @override
   Widget build(BuildContext context) {
 
     _tabcontroller = new TabController( vsync: this, length: myTabs.length);
 
+    const int MEGABYTE = 1024 * 1024;
+    var processors = SysInfo.processors;
 
     return new DefaultTabController(
       length: 4, // Nombre d'onglet
@@ -132,8 +164,18 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       context: context,
                       barrierDismissible: false, // L'utilisateur doit cliquer sur le bouton pour quitter l'alert dialog
                       builder: (BuildContext context) => AlertDialog(
-                        title: Text("Alert dialog"),
-                        content: Text("info application"), // créer une collumn pour afficher plus clairement toute les informations
+                        title: Text("Alert dialog", textAlign: TextAlign.center,),
+                        content: Text
+                          ( "Informations système \n\n" +
+                            "\nUser name: ${SysInfo.userName}\n" +
+                            "\nNumber of processors: ${processors.length}\n" +
+                            "\nTot physical memory:  ${SysInfo.getTotalPhysicalMemory()~/MEGABYTE} MB\n" +
+                            "\nFree physical memory: ${SysInfo.getFreePhysicalMemory() ~/ MEGABYTE} MB\n" +
+                            "\nTotal virtual memory: ${SysInfo.getTotalVirtualMemory() ~/ MEGABYTE} MB\n" +
+                            "\nFree virtual memory : ${SysInfo.getFreeVirtualMemory() ~/ MEGABYTE} MB\n"  +
+                            "\nVirtual memory size : ${SysInfo.getVirtualMemorySize() ~/ MEGABYTE} MB\n",
+                          textAlign: TextAlign.center,
+                        ), // créer une collumn pour afficher plus clairement toute les informations
                         actions: <Widget>[
                           FlatButton(
                             child: Text("OK", style: Theme.of(context).textTheme.button), // style pour ne pas qu'il soit transparent

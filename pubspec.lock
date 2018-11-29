@@ -7,7 +7,7 @@ packages:
       name: analyzer
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.33.3+2"
+    version: "0.33.6"
   args:
     dependency: transitive
     description:
@@ -134,13 +134,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0"
-  device_info:
-    dependency: "direct main"
+  file_utils:
+    dependency: transitive
     description:
-      name: device_info
+      name: file_utils
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.1"
+    version: "0.1.1"
   fixnum:
     dependency: transitive
     description:
@@ -164,7 +164,7 @@ packages:
       name: front_end
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.6+5"
+    version: "0.1.6+8"
   glob:
     dependency: transitive
     description:
@@ -172,6 +172,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.7"
+  globbing:
+    dependency: transitive
+    description:
+      name: globbing
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0"
   graphs:
     dependency: transitive
     description:
@@ -234,7 +241,7 @@ packages:
       name: kernel
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.6+5"
+    version: "0.3.6+8"
   logging:
     dependency: transitive
     description:
@@ -387,6 +394,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.4"
+  system_info:
+    dependency: "direct main"
+    description:
+      name: system_info
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.0"
   term_glyph:
     dependency: transitive
     description:
