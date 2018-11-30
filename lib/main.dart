@@ -139,13 +139,16 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     _controlleur = value;
   }
 
+  int MEGABYTE = 1024 * 1024;
+  var processors = SysInfo.processors;
+
   @override
+
   Widget build(BuildContext context) {
 
     _tabcontroller = new TabController( vsync: this, length: myTabs.length);
 
-    const int MEGABYTE = 1024 * 1024;
-    var processors = SysInfo.processors;
+
 
     return new DefaultTabController(
       length: 4, // Nombre d'onglet
@@ -164,18 +167,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       context: context,
                       barrierDismissible: false, // L'utilisateur doit cliquer sur le bouton pour quitter l'alert dialog
                       builder: (BuildContext context) => AlertDialog(
-                        title: Text("Alert dialog", textAlign: TextAlign.center,),
-                        content: Text
-                          ( "Informations système \n\n" +
-                            "\nUser name: ${SysInfo.userName}\n" +
-                            "\nNumber of processors: ${processors.length}\n" +
-                            "\nTot physical memory:  ${SysInfo.getTotalPhysicalMemory()~/MEGABYTE} MB\n" +
-                            "\nFree physical memory: ${SysInfo.getFreePhysicalMemory() ~/ MEGABYTE} MB\n" +
-                            "\nTotal virtual memory: ${SysInfo.getTotalVirtualMemory() ~/ MEGABYTE} MB\n" +
-                            "\nFree virtual memory : ${SysInfo.getFreeVirtualMemory() ~/ MEGABYTE} MB\n"  +
-                            "\nVirtual memory size : ${SysInfo.getVirtualMemorySize() ~/ MEGABYTE} MB\n",
-                          textAlign: TextAlign.center,
-                        ), // créer une collumn pour afficher plus clairement toute les informations
+                        title: Text("Information système", textAlign: TextAlign.center),
+                        content: Text("Number of processors: ${processors.length}\nTot physical memory:  ${SysInfo.getTotalPhysicalMemory()~/MEGABYTE} MB\nFree physical memory: ${SysInfo.getFreePhysicalMemory() ~/ MEGABYTE} MB\nFree virtual memory : ${SysInfo.getFreeVirtualMemory() ~/ MEGABYTE} MB"),
                         actions: <Widget>[
                           FlatButton(
                             child: Text("OK", style: Theme.of(context).textTheme.button), // style pour ne pas qu'il soit transparent

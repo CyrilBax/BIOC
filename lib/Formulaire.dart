@@ -106,6 +106,18 @@ class _FormulaireState extends State<Formulaire> {
         addWidget();
       }
 
+      if(MyApp.HomePageKey.currentState.indexFormulaire == null){
+        return Container(
+          child: ListTile(
+            title: Text("Aucun service selectionner\ntry again"),
+            trailing: RaisedButton(
+                onPressed: () {
+                  MyApp.HomePageKey.currentState.tabcontroller.index = 0;
+                }
+            ),
+          ),
+        );
+      }
 
 
     return Scaffold(
@@ -178,8 +190,6 @@ class _CreationFormulaireState extends State<CreationFormulaire> {
 
   @override
   Widget build(BuildContext context) {
-
-
 
     MyApp.HomePageKey.currentState.formulaireindex ++ ;
 

@@ -57,6 +57,10 @@ class _ResultatState extends State<Resultat> {
     print("entrer dans le scafold principal");
     print("longeur de la liste de widget : ${contenuMap.length}");
 
+    if(MyApp.HomePageKey.currentState.indexFormulaire != null){
+      MyApp.HomePageKey.currentState.indexFormulaire = null;
+    }
+
     return Scaffold(
       body: Center(
           child: Column(
