@@ -5,6 +5,11 @@ import 'package:flutter/material.dart';
 // Import des pages nescessaires
 import 'main.dart'; // Import pour la global key
 
+
+///****************************************///
+///*****Page de la liste des services*****///
+///**************************************///
+
 class PageServiceList extends StatelessWidget {
 
 
@@ -12,13 +17,10 @@ class PageServiceList extends StatelessWidget {
 
   int _ind;
 
-
   int get ind => _ind;
 
   @override
   Widget build(BuildContext context) {
-
-
 
   var futureBuilder = new FutureBuilder(
   future: MyApp.HomePageKey.currentState.loadService(),
@@ -43,9 +45,9 @@ class PageServiceList extends StatelessWidget {
 
   Widget CreateCard (BuildContext context, AsyncSnapshot snapshot){
 
+    ///Récuperation des informations sur le service
     ServiceList service = snapshot.data;
-    //ServiceList service = MyApp.HomePageKey.currentState.futurBuilder.future as ServiceList;
-    //print(service.service[1].title);
+
     return new ListView.builder(
       itemCount: service.service.length,
       itemBuilder:(BuildContext context, int index){

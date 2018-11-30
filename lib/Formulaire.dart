@@ -6,28 +6,37 @@ import 'package:flutter/services.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 
+
+//Import pages
 import 'main.dart';
 
+///**********************************************///
+///*******Page comportant le formulaire*********///
+///********************************************///
 
-///Class Formulaire
 class Formulaire extends StatefulWidget {
 
 
   Formulaire(GlobalKey key) : super(key: key,);
   @override
   _FormulaireState createState() => _FormulaireState();
+
 }
 
 
 ///State Formulaire
 class _FormulaireState extends State<Formulaire> {
 
+  ///Récup de l'index du service
   int _indexForm = MyApp.HomePageKey.currentState.indexFormulaire;
 
+  ///Recuperation du nombre d'information nescessaire a la creation du service
   int taille = MyApp.HomePageKey.currentState.service.service[MyApp.HomePageKey.currentState.indexFormulaire].element.length - 1;
 
+  ///Liste comrpenant l'enssemble des widgets nescessaire à la creation du formulaire du service choisi
   List<Widget> ListWidget = [];
 
+  ///Variable permettant la lecture et la creation du fichier local Json pour sauvegarder la liste des utilisateurs ayant choisi ce service
   File jsonFile;
   Directory dir;
   String fileName = "${MyApp.HomePageKey.currentState.service.service[MyApp.HomePageKey.currentState.indexFormulaire].title}.json";
@@ -61,6 +70,7 @@ class _FormulaireState extends State<Formulaire> {
 
 
 
+  ///Creation du fichier s'il n'existe pas
   void createFile(Map<dynamic, dynamic> content, String fileName) {
     print("Creating file!");
     File file = new File(dir.path + "/" + fileName);
@@ -69,6 +79,7 @@ class _FormulaireState extends State<Formulaire> {
     file.writeAsStringSync(json.encode(content));
   }
 
+  ///Ecriture du fichier local Json et sauvegarde
   void writeToFile(String key, List<String> value) {
     print("Writing to file!");
     Map<String, dynamic> content = {key : ListEssai};
@@ -83,17 +94,8 @@ class _FormulaireState extends State<Formulaire> {
     }
     this.setState(() => fileContent = json.decode(jsonFile.readAsStringSync()));
 
-//    ServiceList servicerecup = ServiceList.fromJson(fileContent['Netflix']);
-//    print(servicerecup.service[0].title);
-    /*fileContent.forEach(iterateMapEntry);
-    print("");*/
   }
 
-  iterateMapEntry(key, value) {
-    fileContent[key];
-    print('$key:$value');
-    return Text("hello");
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -174,6 +176,7 @@ class CreationFormulaire extends StatefulWidget {
 
 class _CreationFormulaireState extends State<CreationFormulaire> {
 
+  ///Valeurs rentrer par l'utilisateur
   ServiceList serviceFormulaire = MyApp.HomePageKey.currentState.service;
   int _indexForm = MyApp.HomePageKey.currentState.indexFormulaire;
   bool _switchvalue = false;
@@ -207,6 +210,7 @@ class _CreationFormulaireState extends State<CreationFormulaire> {
   Widget creation(){
 
 
+    /// Verification du type de widgets qu'il faut créer
     switch(serviceFormulaire.service[_indexForm].element[widget.i].type){
 
 

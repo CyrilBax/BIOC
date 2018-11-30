@@ -1,20 +1,27 @@
 import 'package:flutter/material.dart';
 import 'main.dart';
 
-// Page d'information sur les developpeur de l'application
+
+
+///
+/// Page d'information sur les membres de l'équipe de développement
+///
 
 class Dev extends StatelessWidget{
 
   Dev (GlobalKey key) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+
     return new Scaffold(
       body: new Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            new Divider(),
-            new SizedBox(height: 20.0),
+
+            new Divider(), // ligne de séparation
+            new SizedBox(height: 20.0), // box pour un meilleurs écartement des widgets
             new Text("Application BIOC crée par\n", style: Theme.of(context).textTheme.title),
             new SizedBox(height: 20.0),
             new Divider(),

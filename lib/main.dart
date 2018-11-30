@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:biocapp/JsonClass.dart';
 import 'PageServiceList.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
@@ -14,7 +13,10 @@ import 'Formulaire.dart';
 import 'Resultat.dart';
 import 'Dev.dart';
 
-//Lancement de l'application
+///------------------------------------------------//
+///----------Lancement de l'application-----------//
+///----------------------------------------------//
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -37,9 +39,9 @@ class MyApp extends StatelessWidget {
 
 }
 
-//*************//
-//Page d'acceuil
-//*************//
+///**************************//
+///***** Page d'acceuil ****//
+///************************//
 
 
 class HomePage extends StatefulWidget {
@@ -50,11 +52,13 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => new  _HomePageState();
 }
 
-//---------------------//
-//---------------------//
+///---------------------//
+///---------------------//
+///---------------------//
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
+  /// List des elements de la NavigationBar
   final List<Tab> myTabs = <Tab>[
     new Tab(
       text: "Service",
@@ -79,6 +83,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   FutureBuilder _futureBuilder;
 
+  /// Index du service que l'on choisi
   int _indexFormulaire;
 
   int get indexFormulaire => _indexFormulaire;
@@ -101,6 +106,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     _service = value;
   }
 
+  ///index permettant de connaitre l'emplacement dans la liste des widgets du fichier Json
   int _formulaireindex;
 
   int get formulaireindex => _formulaireindex;
@@ -127,6 +133,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     _ListEssai = value;
   }
 
+  ///Cration du controleur
   List<String> _controlleur =[];
 
   List<String> get controlleur => _controlleur;
@@ -135,15 +142,19 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     _controlleur = value;
   }
 
+  ///Variables permettant l'affichage des informations relatives au telephone
   int MEGABYTE = 1024 * 1024;
   var processors = SysInfo.processors;
 
-  @override
+  ///-------------------------------//
+  ///-------Widget principal-------//
+  ///-----------------------------//
 
+  @override
   Widget build(BuildContext context) {
 
+    ///Tab controller pour le changement d'index de la TabControlleur
     _tabcontroller = new TabController( vsync: this, length: myTabs.length);
-
 
 
     return new DefaultTabController(
@@ -196,6 +207,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     );
   }
 
+
+
+  /// Fonctions permettant la lecture du fichier Json
 
   Future<String> _loadServiceAsset() async {
     return await rootBundle.loadString('JsonFile/exemple.json');

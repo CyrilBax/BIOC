@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 
 import 'main.dart';
 
-/// Page de reference pour les resultats
+///**************************************************///
+///******Page de reference pour les resultats*******///
+///************************************************///
 
 class Resultat extends StatefulWidget {
 
@@ -14,8 +16,10 @@ class Resultat extends StatefulWidget {
   _ResultatState createState() => _ResultatState();
 }
 
+
 class _ResultatState extends State<Resultat> {
 
+  ///Variable permettant la lecture du fichier Json local et l'affichage des résultats
   File jsonFile;
   Directory dir = MyApp.HomePageKey.currentState.directory;
   String fileName = "${MyApp.HomePageKey.currentState.service.service[MyApp.HomePageKey.currentState.indexFormulaire].title}.json";
@@ -35,6 +39,7 @@ class _ResultatState extends State<Resultat> {
       } );
   }
 
+  ///Fonction d'appel à la création de la liste des utilisateurs
   affichage(){
     if(fileExists == true){print("file exist");}
     print("longeur de file content :${fileContent.length}");
@@ -53,8 +58,6 @@ class _ResultatState extends State<Resultat> {
   @override
   Widget build(BuildContext context) {
 
-    print("entrer dans le scafold principal");
-    print("longeur de la liste de widget : ${contenuMap.length}");
 
     if(MyApp.HomePageKey.currentState.indexFormulaire != null){
       MyApp.HomePageKey.currentState.indexFormulaire = null;
@@ -65,12 +68,14 @@ class _ResultatState extends State<Resultat> {
           child: Column(
               children: <Widget>[
                 SizedBox(height: 20.0),
+                ///Card contenant les informations des utilisateurs
                 Card(
                   elevation: 8.0,
                   margin: EdgeInsets.all(20.0),
                   child: Text(contenuMap.toString(), style: Theme.of(context).textTheme.title),
                 ),
                 SizedBox(height: 20.0),
+                ///Button permetant de retourner sur la pages d'acceuil
                 Center(
                     child :RaisedButton(
                         child: Text("Return"),
@@ -92,6 +97,9 @@ class _ResultatState extends State<Resultat> {
     );
   }
 }
+
+///Classe permettant de créer un widget avec l'enssemble des informations d'un utilisateur ayant choisi le service courant
+
 
 class Users extends StatefulWidget {
 
