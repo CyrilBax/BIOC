@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 
-import 'Alert.dart';
 import 'main.dart';
 
 
@@ -125,10 +124,17 @@ class _FormulaireState extends State<Formulaire> {
         children: <Widget>[
           SizedBox(height: 20.0),
           Flexible(
-                child: ListView.builder(
-                    itemCount: taille,
-                    itemBuilder: ( BuildContext context, int index) => ListWidget[index]
-                )
+              child: ListView.builder(
+                  itemCount: taille,
+                  itemBuilder: ( BuildContext context, int index) {
+                    return Column(
+                      children: <Widget>[
+                        ListWidget[index],
+                        Divider()
+                      ],
+                    );
+                  }
+              )
           ),
           Center(
               child :RaisedButton(

@@ -10,7 +10,6 @@ import "package:system_info/system_info.dart";
 
 
 //import des pages
-import 'Alert.dart';
 import 'Formulaire.dart';
 import 'Resultat.dart';
 import 'Dev.dart';
@@ -33,9 +32,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       //On appel notre page principal
       home: new HomePage( key: HomePageKey),
-      //routes: <String, WidgetBuilder>{
-      //  '/Form' : (BuildContext context) => new Formulaire(),
-      //},
     );
   }
 
@@ -171,7 +167,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         content: Text("Number of processors: ${processors.length}\nTot physical memory:  ${SysInfo.getTotalPhysicalMemory()~/MEGABYTE} MB\nFree physical memory: ${SysInfo.getFreePhysicalMemory() ~/ MEGABYTE} MB\nFree virtual memory : ${SysInfo.getFreeVirtualMemory() ~/ MEGABYTE} MB"),
                         actions: <Widget>[
                           FlatButton(
-                            child: Text("OK", style: Theme.of(context).textTheme.button), // style pour ne pas qu'il soit transparent
+                            child: Text("Bon chance", style: Theme.of(context).textTheme.button), // style pour ne pas qu'il soit transparent
                             color: Colors.grey, // couleur du bouton
                             onPressed: () => Navigator.pop(context), // Retourner a la page precedente
                           )

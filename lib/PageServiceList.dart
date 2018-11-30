@@ -1,13 +1,8 @@
-import 'dart:convert';
 
 import 'package:biocapp/JsonClass.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'PageServiceList.dart';
 
 // Import des pages nescessaires
-import 'Formulaire.dart';
-import 'Alert.dart'; // Page de test de nos widgets
 import 'main.dart'; // Import pour la global key
 
 class PageServiceList extends StatelessWidget {

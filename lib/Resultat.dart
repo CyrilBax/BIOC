@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
 
 import 'main.dart';
 
@@ -65,10 +64,21 @@ class _ResultatState extends State<Resultat> {
       body: Center(
           child: Column(
               children: <Widget>[
+                SizedBox(height: 20.0),
                 Card(
                   elevation: 8.0,
                   margin: EdgeInsets.all(20.0),
                   child: Text(contenuMap.toString(), style: Theme.of(context).textTheme.title),
+                ),
+                SizedBox(height: 20.0),
+                Center(
+                    child :RaisedButton(
+                        child: Text("Return"),
+                        color: Colors.grey,
+                        onPressed: (){
+                          MyApp.HomePageKey.currentState.tabcontroller.animateTo(MyApp.HomePageKey.currentState.tabcontroller.index = 0);
+                        }
+                    )
                 )
               ]
           )
